@@ -1,9 +1,8 @@
 package com.kbds.minipay.domain;
 
+import com.kbds.minipay.repository.UserRepository;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,15 +35,18 @@ public class Account {
     private Double interestRate;
 
     @Column
-    private Double balance;
+    private Integer balance;
 
     @Builder
-    public Account(Long userId, String name, boolean isMain, double interestRate, boolean isSaving){
+    public Account(User user, String name, boolean isMain, double interestRate, boolean isSaving, int balance) {
         this.user = user;
+        this.balance = balance;
         this.name = name;
         this.isMain = isMain;
         this.interestRate = interestRate;
         this.isSaving = isSaving;
+        this.active = true;
     }
+
 
 }

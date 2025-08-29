@@ -1,10 +1,7 @@
 package com.kbds.minipay.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -12,6 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private long id;
 
     @Column
