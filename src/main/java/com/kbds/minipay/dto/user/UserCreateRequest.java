@@ -16,6 +16,8 @@ public class UserCreateRequest {
 
     String phoneNumber;
 
+    String password;
+
     public User toEntity() {
         return User.builder()
                 .email(this.email)

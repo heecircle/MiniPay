@@ -25,6 +25,7 @@ public class UserService {
                 .name("")
                 .isMain(true)
                 .isSaving(false)
+                .password(userCreateRequest.getPassword())
                 .build();
 
         accountRepository.save(account);
