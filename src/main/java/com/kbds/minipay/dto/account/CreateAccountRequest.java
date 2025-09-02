@@ -5,11 +5,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class WithdrawRequest {
+public class CreateAccountRequest {
     Long userId;
-    Long accountId;
-    Long putAccountId;
-    int withdrawAmount;
-
+    String name;
     String password;
+    int interestRate;
 }

@@ -44,9 +44,9 @@ public class UserWithdrawLimit extends BaseTimeEntity {
         throw new BalanceException("잔액이 부족합니다.");
     }
 
-    public int withdrawLimit(int amount){
+    public Long withdrawLimit(int amount){
         this.withdrawLimit -= amount;
-        return this.withdrawLimit;
+        return this.id;
     }
 
 }

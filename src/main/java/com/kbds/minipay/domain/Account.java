@@ -31,7 +31,6 @@ public class Account {
     @Column
     private Boolean isSaving;
 
-
     @Column
     private Double interestRate;
 
@@ -62,5 +61,17 @@ public class Account {
             return;
         }
         throw new NotAvailableException("출금 한도가 초과되었습니다.");
+    }
+
+    public Long getIdByPassword(String password){
+        if(password.equals(this.password)){
+            return id;
+        }
+        return null;
+    }
+
+    public void setAmount(int amount, boolean isWithdraw){
+        if(isWithdraw){this.balance -= amount;}
+        else{this.balance += amount;}
     }
 }
