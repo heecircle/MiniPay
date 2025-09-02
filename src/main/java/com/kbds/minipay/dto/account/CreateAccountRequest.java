@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CreateAccountRequest {
-    Long userId;
-    String name;
-    String password;
-    int interestRate;
+	Long userId;
+	String name;
+	String password;
+	int interestRate;
 }
