@@ -104,7 +104,16 @@ public class AccountService {
 			.orElseThrow(() -> new NotFoundException(""));
 
 		withdrawAccount.isOwner(user, withdrawRequest.getPassword());
-		withdrawAccount.withdrawAvailable(withdrawRequest.getWithdrawAmount());
+		try {
+			withdrawAccount.withdrawAvailable(withdrawRequest.getWithdrawAmount());
+		} catch (BalanceException e) {
+			int chargeNeedAmount = withdrawRequest.getWithdrawAmount() - withdrawAccount.getBalance();
+			chargeNeedAmount = (int)Math.ceil((double)chargeNeedAmount / 10_000);
+			chargeNeedAmount *= 10_000;
+			chargeAccount(new ChargeRequest(withdrawRequest.getAccountNumber(), chargeNeedAmount));
+			withdrawAccount.setAmount(chargeNeedAmount + withdrawAccount.getBalance(), false);
+		}
+
 		withdrawAccount.isMain();
 
 		withdrawAccount.setAmount(withdrawRequest.getWithdrawAmount(), true);
@@ -114,7 +123,7 @@ public class AccountService {
 	}
 
 	public void chargeAccount(ChargeRequest chargeRequest) throws BalanceException {
-		
+
 	}
 
 }

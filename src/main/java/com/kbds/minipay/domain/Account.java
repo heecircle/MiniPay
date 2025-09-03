@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -50,6 +51,7 @@ public class Account {
 	private Double interestRate;
 
 	@Column
+	@Getter
 	@ColumnDefault(value = "0")
 	private Integer balance;
 
@@ -78,7 +80,7 @@ public class Account {
 		if (this.balance >= amount) {
 			return;
 		}
-		throw new NotAvailableException("출금 한도가 초과되었습니다.");
+		throw new NotAvailableException("잔액이 충분하지 않습니다.");
 	}
 
 	public Long getIdByPassword(String password) {
