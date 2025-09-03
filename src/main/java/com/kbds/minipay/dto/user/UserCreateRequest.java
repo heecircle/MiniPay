@@ -19,6 +19,8 @@ public class UserCreateRequest {
 
 	String password;
 
+	String accountName;
+
 	public User toEntity() {
 		return User.builder()
 			.email(this.email)

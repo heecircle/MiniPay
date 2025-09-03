@@ -1,5 +1,8 @@
 package com.kbds.minipay.domain;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.boot.model.naming.IllegalIdentifierException;
+
 import com.kbds.minipay.common.exception.NotAvailableException;
 
 import jakarta.persistence.Column;
@@ -40,14 +43,19 @@ public class Account {
 	private Boolean isSaving;
 
 	@Column
+	private String accountNumber;
+
+	@Column
+	@ColumnDefault(value = "0")
 	private Double interestRate;
 
 	@Column
+	@ColumnDefault(value = "0")
 	private Integer balance;
 
 	@Builder
 	public Account(User user, String name, boolean isMain, double interestRate, boolean isSaving, int balance,
-		String password) {
+		String password, String accountNumber) {
 		this.user = user;
 		this.balance = balance;
 		this.name = name;
@@ -55,6 +63,7 @@ public class Account {
 		this.interestRate = interestRate;
 		this.isSaving = isSaving;
 		this.active = true;
+		this.accountNumber = accountNumber;
 		this.password = password;
 	}
 
@@ -84,6 +93,12 @@ public class Account {
 			this.balance -= amount;
 		} else {
 			this.balance += amount;
+		}
+	}
+
+	public void isMain() {
+		if (!this.isMain) {
+			throw new IllegalIdentifierException("메인 계좌가 아닌 돈에서 출금은 불가능 합니다.");
 		}
 	}
 }

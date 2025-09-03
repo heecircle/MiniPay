@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@NonNull
 	Optional<User> findById(@NonNull Long id);
+
+	@NonNull
+	Optional<User> findByResidenceNumber(@NonNull String residenceNumber);
 }

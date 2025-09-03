@@ -17,7 +17,7 @@ public class UserController {
 	private final UserService userService;
 
 	@PostMapping("/create")
-	public Long createUser(@RequestBody UserCreateRequest userCreateRequest) {
+	public String createUser(@RequestBody UserCreateRequest userCreateRequest) {
 		return userService.userCreate(userCreateRequest);
 	}
 }

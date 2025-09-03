@@ -1,5 +1,7 @@
 package com.kbds.minipay.service;
 
+import static com.kbds.minipay.service.AccountNumberMaker.*;
+
 import org.springframework.stereotype.Service;
 
 import com.kbds.minipay.domain.Account;
@@ -18,19 +20,25 @@ public class UserService {
 	private final UserRepository userRepository;
 
 	@Transactional
-	public Long userCreate(UserCreateRequest userCreateRequest) {
+	public String userCreate(UserCreateRequest userCreateRequest) {
+		// User 생성
 		User user = userCreateRequest.toEntity();
 		userRepository.save(user);
 
+		String accountNumber = makeAccountNumber();
+
+		// user의 Account 생성
 		Account account = Account.builder()
 			.user(user)
-			.name("")
+			.name(userCreateRequest.getName())
+			.accountNumber(accountNumber)
 			.isMain(true)
 			.isSaving(false)
 			.password(userCreateRequest.getPassword())
 			.build();
 
 		accountRepository.save(account);
-		return user.getId();
+		return accountNumber;
 	}
+
 }

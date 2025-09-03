@@ -5,9 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreateAccountRequest {
-	String residenceNumber;
-	String accountName;
-	String password;
-	int interestRate;
+public class ChargeRequest {
+	String accountNumber;
+	Integer chargeAmount;
 }

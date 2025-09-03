@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class WithdrawRequest {
-	Long userId;
-	Long accountId;
-	Long putAccountId;
+	String residenceNumber;
+	String accountNumber;
+	String putAccountNumber;
 	int withdrawAmount;
 	String password;
 }

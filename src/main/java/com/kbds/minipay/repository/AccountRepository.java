@@ -13,4 +13,6 @@ import lombok.NonNull;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 	@NonNull
 	Optional<Account> findById(@NonNull Long id);
+
+	Optional<Account> findByAccountNumber(@NonNull String accountNumber);
 }
